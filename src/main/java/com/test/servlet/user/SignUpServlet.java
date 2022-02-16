@@ -15,6 +15,9 @@ import java.io.IOException;
 public class SignUpServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        // TODO 在这里实现注册功能。注册成功后跳转到帖子详情页面
+
+
         super.doGet(req, resp);
     }
 

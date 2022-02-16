@@ -15,6 +15,7 @@ public interface UserMapper {
     // 根据姓名查询用户
     public User selectUserByName(String uname);
 
-
+    // 添加用户
+    public int insertUser(User user);
 
 }

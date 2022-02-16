@@ -6,6 +6,8 @@ import com.test.service.UserService;
 import com.test.utils.MybatisUtil;
 import org.apache.ibatis.session.SqlSession;
 
+import java.util.Map;
+
 /**
  * @ClassName: UserServiceImpl
  * @Description: UserService实现类
@@ -15,17 +17,32 @@ import org.apache.ibatis.session.SqlSession;
 public class UserServiceImpl implements UserService {
 
     @Override
-    public void SignUpService(User user) {
-
-    }
-
-    @Override
-    public void LoginService(String username, String password) {
+    public boolean LoginService(String username, String password) {
         // 数据库连接
         SqlSession sqlSession = MybatisUtil.getSqlSession();
         UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
 
         // 使用userMapper提供的方法进行数据库查询即可
 
+
+
+
+        // 登录成功
+        return true;
+    }
+
+
+    @Override
+    public boolean SignUpService(Map<String, String> userInfos) {
+        // 数据库连接
+        SqlSession sqlSession = MybatisUtil.getSqlSession();
+        UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
+
+        // 使用userMapper提供的方法
+
+
+
+        // 注册成功
+        return true;
     }
 }

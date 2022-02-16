@@ -21,5 +21,9 @@
 
     </select>
 
+    <!--  添加用户  -->
+    <insert id="insertUser" parameterType="User">
+
+    </insert>
 
 </mapper>

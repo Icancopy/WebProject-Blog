@@ -23,7 +23,16 @@
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/login.do</url-pattern>
     </servlet-mapping>
-
+    
+    <!--  SignUpServlet：注册账号  -->
+    <servlet>
+        <servlet-name>SignUpServlet</servlet-name>
+        <servlet-class>com.test.servlet.user.SignUpServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>SignUpServlet</servlet-name>
+        <url-pattern>/signup.do</url-pattern>
+    </servlet-mapping>
 
 
     <!--   servlet ends-->

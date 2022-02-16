@@ -2,6 +2,8 @@ package com.test.service;
 
 import com.test.pojo.User;
 
+import java.util.Map;
+
 /**
  * @ClassName: UserService
  * @Description: 用户服务
@@ -9,9 +11,9 @@ import com.test.pojo.User;
  * @date: 2022/2/13 9:36
  */
 public interface UserService {
-    // 注册服务
-    public void SignUpService(User user);
-
     // 登录服务
-    public void LoginService(String username, String password);
+    public boolean LoginService(String username, String password);
+
+    // 注册方法
+    public boolean SignUpService(Map<String, String> userInfos);
 }
