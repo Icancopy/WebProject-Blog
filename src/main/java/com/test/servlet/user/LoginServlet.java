@@ -1,7 +1,8 @@
 package com.test.servlet.user;
-
 import com.test.dao.UserMapper;
 import com.test.pojo.User;
+import com.test.service.UserService;
+import com.test.service.impl.UserServiceImpl;
 import com.test.utils.MybatisUtil;
 import org.apache.ibatis.session.SqlSession;
 
@@ -23,36 +24,25 @@ public class LoginServlet extends HttpServlet {
     // Servlet 调用业务层代码
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
-//        System.out.println("进入LoginServlet");
-//
-//        // 获取用户名和密码
-//        String userName = req.getParameter("userName");
-//        String password = req.getParameter("password");
-//        if (userName == null || password == null)
-//            System.out.println("无法从前端获取变量");
-//
-//        // 和数据库中的密码进行对比
-//        // 测试：
-//        SqlSession sqlSession = MybatisUtil.getSqlSession();
-//        System.out.println(userName + " " + password);
-//        UserMapper mapper = sqlSession.getMapper(UserMapper.class);
-//        User user = mapper.selectUserById(1);
-//
-//
-//        if (user != null) {  // 查有此人，可以登录
-//            req.setAttribute("success", "登录成功！");
-//            // 将用户的信息放到Session中
-//            System.out.println(user);
-//            // 跳转到内部主页
-//            resp.sendRedirect("index.jsp");
-//        }
-//        else {  // 查无此人，无法登录
-//            // 转发回登录页面，顺带提示：用户名或密码错误
-//            System.out.println("无法连接数据库");
-//            req.setAttribute("error", "用户名或密码错误！");
-//            req.getRequestDispatcher("logInPage.html").forward(req, resp);
-//        }
-
+        //设置字符编码集，防止乱码
+        req.setCharacterEncoding("utf-8");
+        resp.setCharacterEncoding("utf-8");
+        // 获取用户名和密码
+        String userName = req.getParameter("userName");
+        String password = req.getParameter("password");
+        UserService userService = new UserServiceImpl();
+        //定义一个flag标记，判断是否登录成功
+        boolean flag=userService.login(userName,password);
+        if(flag){
+            //登录成功，跳转到帖子展示页面
+            req.getSession().setAttribute("success", "登录成功！");
+            req.getRequestDispatcher("帖子展示的url").forward(req,resp);
+        }else{
+            //登录失败，刷新重新登录
+            req.getSession().setAttribute("error", "登录失败！");
+            resp.setHeader("Refresh","1,URL=登录界面的url");
+        }
+//        
     }
 
     @Override
