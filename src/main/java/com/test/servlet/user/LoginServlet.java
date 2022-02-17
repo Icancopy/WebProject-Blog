@@ -40,7 +40,7 @@ public class LoginServlet extends HttpServlet {
         }else{
             //登录失败，刷新重新登录
             req.getSession().setAttribute("error", "登录失败！");
-            resp.setHeader("Refresh","1,URL=登录界面的url");
+            resp.setHeader("Refresh","1,登录界面的url");
         }
 //        
     }
