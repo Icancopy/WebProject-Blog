@@ -24,15 +24,17 @@ public class LoginServlet extends HttpServlet {
     // Servlet 调用业务层代码
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
+//        System.out.println("进入LoginServlet");
         //设置字符编码集，防止乱码
         req.setCharacterEncoding("utf-8");
         resp.setCharacterEncoding("utf-8");
         // 获取用户名和密码
         String userName = req.getParameter("userName");
         String password = req.getParameter("password");
-        UserService userService = new UserServiceImpl();
-        //调用userService的login方法判断是否登录成功
-        boolean flag=userService.login(userName,password);
+        //调用service里面的LoginService方法，判断是否登录成功
+        UserServiceImpl userService = new UserServiceImpl();
+        boolean flag=userService.LoginService(userName,password);
+        //根据返回的值进行页面的跳转
         if(flag){
             //登录成功，跳转到帖子展示页面
             req.getSession().setAttribute("success", "登录成功！");
@@ -40,9 +42,9 @@ public class LoginServlet extends HttpServlet {
         }else{
             //登录失败，刷新重新登录
             req.getSession().setAttribute("error", "登录失败！");
-            resp.setHeader("Refresh","1,登录界面的url");
+            resp.setHeader("Refresh","1");
         }
-//        
+//
     }
 
     @Override
