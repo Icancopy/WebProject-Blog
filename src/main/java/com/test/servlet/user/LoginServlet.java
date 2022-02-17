@@ -31,7 +31,7 @@ public class LoginServlet extends HttpServlet {
         String userName = req.getParameter("userName");
         String password = req.getParameter("password");
         UserService userService = new UserServiceImpl();
-        //定义一个flag标记，判断是否登录成功
+        //调用userService的login方法判断是否登录成功
         boolean flag=userService.login(userName,password);
         if(flag){
             //登录成功，跳转到帖子展示页面
