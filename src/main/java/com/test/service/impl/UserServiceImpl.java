@@ -23,12 +23,16 @@ public class UserServiceImpl implements UserService {
         UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
 
         // 使用userMapper提供的方法进行数据库查询即可
+        User users = userMapper.selectUserByName(username);
 
+        //是否登录成功
+        if (users.toString().equals(password)){
+            return true;
+        }else{
+            return false;
+        }
 
-
-
-        // 登录成功
-        return true;
+    }
     }
 
 
@@ -38,11 +42,27 @@ public class UserServiceImpl implements UserService {
         SqlSession sqlSession = MybatisUtil.getSqlSession();
         UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
 
-        // 使用userMapper提供的方法
+        //对Map进行解包
+        Set<Map.Entry<String, String>> entrySet = userInfos.entrySet();
+        for (Map.Entry<String, String> me : entrySet) {
+            String key = me.getKey();
+            String value = me.getValue();
 
-
-
-        // 注册成功
-        return true;
+            if (key.length() > 0 && key.length() <= 20 && value.length() <= 32 && value.length() > 0) {
+                // 使用userMapper提供的方法
+                userMapper.insertUser(key, value);
+                //提交事务
+                sqlSession.commit();
+                // 注册成功
+                flag = 1;
+            }
+        }
+        判断注册是否成功
+        if(flag == 1){
+            return true;
+        }else {
+            return false;
+        }
+    }
     }
 }
