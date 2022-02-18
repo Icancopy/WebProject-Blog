@@ -5,7 +5,7 @@
 
 <mapper namespace="com.test.dao.UserMapper">
     <sql id="TABLES">
-        webproject.user
+        webproject.users
     </sql>
 
     <!--  查询用户  -->
@@ -18,12 +18,16 @@
 
     <!--  根据姓名查询   -->
     <select id="selectUserByName" resultType="User">
-
+        select * from webproject.users WHERE uname = #{uname}
     </select>
 
     <!--  添加用户  -->
     <insert id="insertUser" parameterType="User">
-
+        INSERT INTO
+        <include refid="TABLES"/>
+            (uname, upassword, email)
+        VALUES
+            (#{uname}, #{upassword}, #{email})
     </insert>
 
 </mapper>

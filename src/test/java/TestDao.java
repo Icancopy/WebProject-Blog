@@ -15,6 +15,6 @@ public class TestDao {
         SqlSession sqlSession = MybatisUtil.getSqlSession();
         UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
 
-        System.out.println(userMapper.selectUserById(1));
+        System.out.println(userMapper.selectUserByName("admin"));
     }
 }

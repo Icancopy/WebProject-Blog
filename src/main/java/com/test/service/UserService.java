@@ -12,8 +12,8 @@ import java.util.Map;
  */
 public interface UserService {
     // 登录服务
-    public boolean LoginService(String username, String password);
+    public boolean LoginService(Map<String, String> params);
 
     // 注册方法
-    public boolean SignUpService(Map<String, String> userInfos);
+    public boolean SignUpService(Map<String, String> params);
 }

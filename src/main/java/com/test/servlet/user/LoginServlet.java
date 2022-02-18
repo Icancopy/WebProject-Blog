@@ -1,15 +1,20 @@
 package com.test.servlet.user;
 
-import com.test.dao.UserMapper;
-import com.test.pojo.User;
-import com.test.utils.MybatisUtil;
-import org.apache.ibatis.session.SqlSession;
+import com.alibaba.fastjson.JSON;
+import com.test.component.CommonResult;
+import com.test.component.WebResponce;
+
+import com.test.service.impl.UserServiceImpl;
+import com.test.utils.JSONUtil;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import java.io.IOException;
+
+import java.util.Map;
 
 /**
  * @ClassName: LoginServlet
@@ -19,39 +24,39 @@ import java.io.IOException;
  */
 public class LoginServlet extends HttpServlet {
 
+    /**
+     * servlet处理json的帖子：
+     * https://blog.csdn.net/zknxx/article/details/52281220
+     **/
 
     // Servlet 调用业务层代码
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
-//        System.out.println("进入LoginServlet");
-//
-//        // 获取用户名和密码
-//        String userName = req.getParameter("userName");
-//        String password = req.getParameter("password");
-//        if (userName == null || password == null)
-//            System.out.println("无法从前端获取变量");
-//
-//        // 和数据库中的密码进行对比
-//        // 测试：
-//        SqlSession sqlSession = MybatisUtil.getSqlSession();
-//        System.out.println(userName + " " + password);
-//        UserMapper mapper = sqlSession.getMapper(UserMapper.class);
-//        User user = mapper.selectUserById(1);
-//
-//
-//        if (user != null) {  // 查有此人，可以登录
-//            req.setAttribute("success", "登录成功！");
-//            // 将用户的信息放到Session中
-//            System.out.println(user);
-//            // 跳转到内部主页
-//            resp.sendRedirect("index.jsp");
-//        }
-//        else {  // 查无此人，无法登录
-//            // 转发回登录页面，顺带提示：用户名或密码错误
-//            System.out.println("无法连接数据库");
-//            req.setAttribute("error", "用户名或密码错误！");
-//            req.getRequestDispatcher("logInPage.html").forward(req, resp);
-//        }
+        // 设置请求编码
+        req.setCharacterEncoding("UTF-8");
+        // 设置响应编码格式
+        resp.setContentType("application/json; charset=utf-8");
+
+        // 1. json数据预处理
+        String requestJSONData = JSONUtil.getRequestJSONData(req);
+
+        // 2. 封装参数
+        Map<String, String> params = (Map<String, String>) JSON.parse(requestJSONData);
+
+        // 3. 调用UserService登录服务
+        UserServiceImpl userService = new UserServiceImpl();
+        String result = null;
+
+        if (userService.LoginService(params)) {
+            CommonResult success = new CommonResult(WebResponce.SUCCESS.getCode(), "true");
+            result = JSON.toJSONString(success);
+            resp.getWriter().write(result);
+        }
+        else {
+            CommonResult fail = new CommonResult(WebResponce.FAIL.getCode(), "false");
+            result = JSON.toJSONString(fail);
+            resp.getWriter().write(result);
+        }
 
     }
 

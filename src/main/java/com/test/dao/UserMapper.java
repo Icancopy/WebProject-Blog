@@ -1,6 +1,7 @@
 package com.test.dao;
 
 import com.test.pojo.User;
+import org.apache.ibatis.annotations.Param;
 
 /**
  * @ClassName: UserMapper

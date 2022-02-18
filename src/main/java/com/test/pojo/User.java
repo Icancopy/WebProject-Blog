@@ -9,19 +9,38 @@ package com.test.pojo;
 public class User {
     private Integer uid;
     private String  uname;
+    private String  upassword;
     private String  uimg;
     private Integer gender;
     private String  uinfo;
+    private String email;
 
     public User() {
     }
 
-    public User(Integer uid, String uname, String uimg, Integer gender, String uinfo) {
+    public User(String uname, String upassword, String email) {
+        this.uname = uname;
+        this.upassword = upassword;
+        this.email = email;
+    }
+
+    public User(Integer uid, String uname, String upassword, String email, String uimg, Integer gender, String uinfo) {
         this.uid = uid;
         this.uname = uname;
+        this.upassword = upassword;
+        this.email = email;
         this.uimg = uimg;
         this.gender = gender;
         this.uinfo = uinfo;
+
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public Integer getUid() {
@@ -38,6 +57,14 @@ public class User {
 
     public void setUname(String uname) {
         this.uname = uname;
+    }
+
+    public String getUpassword() {
+        return upassword;
+    }
+
+    public void setUpassword(String upassword) {
+        this.upassword = upassword;
     }
 
     public String getUimg() {

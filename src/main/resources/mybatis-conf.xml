@@ -13,7 +13,7 @@
         <setting name="logImpl" value="STDOUT_LOGGING"/>
 
         <!-- 此处开启自动驼峰命名规则映射     -->
-        <setting name="mapUnderscoreToCamelCase" value="true"/>
+<!--        <setting name="mapUnderscoreToCamelCase" value="true"/>-->
     </settings>
 
     <!-- 别名: 可以给实体类起别名  -->
@@ -37,6 +37,7 @@
 
     <!--  添加包扫描   -->
     <mappers>
+<!--        <mapper resource="com/test/dao/UserMapper.xml"/>-->
         <package name="com.test.dao"/>
     </mappers>
 
