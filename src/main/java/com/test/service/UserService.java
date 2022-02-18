@@ -16,4 +16,7 @@ public interface UserService {
 
     // 注册方法
     public boolean SignUpService(Map<String, String> userInfos);
+    
+    //两次密码验证
+    public boolean equalsPassword(String password,String configPassword);
 }
